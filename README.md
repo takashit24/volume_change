@@ -63,6 +63,14 @@ npm create vite@latest . -- --template react-ts
 ## デプロイ手順（例）
 このリポジトリは静的サイトとしてビルドできるため、Vercel/Netlify/GitHub Pages などの静的ホスティングにそのまま載せられます。以下は代表的な手順例です。
 
+### GitHub Pages（このリポジトリ向け最短ステップ）
+1. GitHub 上でリポジトリを作成し、このブランチ（`work`）を push。
+2. リポジトリ設定 → Pages → ソースを「GitHub Actions」に変更。
+3. 必要に応じて `BASE_PATH` を `/リポジトリ名/` に設定したまま `.github/workflows/deploy.yml` を手動実行、または `work` ブランチへ push して自動実行。
+4. ワークフロー完了後、Pages の URL（例: `https://<username>.github.io/<repo>/`）にアクセスすると動作確認できます。
+
+> 既に Actions ワークフローを同梱しているので、追加の設定なしで GitHub Pages デプロイを始められます。ffmpeg コアファイルは CDN から取得するため、公開先でネットワークアクセスが必要です。
+
 ### Vercel の場合
 1. リポジトリを GitHub に push し、Vercel のダッシュボードで「Import Project」を選択。
 2. Framework Preset に「Vite」を選択し、Build Command は `npm run build`、Output Directory は `dist` に設定。

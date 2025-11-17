@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const base = process.env.BASE_PATH ?? '/';
+// GitHub Pages 配信パスをデフォルトでリポジトリ名に合わせる
+const base = process.env.BASE_PATH ?? '/volume_change/';
 
 // https://vitejs.dev/config/
 export default defineConfig({

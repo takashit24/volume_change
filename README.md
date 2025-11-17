@@ -63,13 +63,16 @@ npm create vite@latest . -- --template react-ts
 ## デプロイ手順（例）
 このリポジトリは静的サイトとしてビルドできるため、Vercel/Netlify/GitHub Pages などの静的ホスティングにそのまま載せられます。以下は代表的な手順例です。
 
-### GitHub Pages（このリポジトリ向け最短ステップ）
-1. GitHub 上でリポジトリを作成し、このブランチ（`work`）を push。
-2. リポジトリ設定 → Pages → ソースを「GitHub Actions」に変更。
-3. 必要に応じて `BASE_PATH` を `/リポジトリ名/` に設定したまま `.github/workflows/deploy.yml` を手動実行、または `work` ブランチへ push して自動実行。
-4. ワークフロー完了後、Pages の URL（例: `https://<username>.github.io/<repo>/`）にアクセスすると動作確認できます。
+### GitHub Pages（gh-pages ブランチに自動デプロイ）
+このリポジトリでは Vite の `base` をデフォルトで `/volume_change/` に設定しており、GitHub Pages の公開パスに合わせています（環境変数 `BASE_PATH` で上書き可）。Actions ワークフロー `.github/workflows/deploy.yml` は `dist/` を Pages へアップロードし、`gh-pages` ブランチとして公開します。
 
-> 既に Actions ワークフローを同梱しているので、追加の設定なしで GitHub Pages デプロイを始められます。ffmpeg コアファイルは CDN から取得するため、公開先でネットワークアクセスが必要です。
+最短手順:
+1. GitHub 上でリポジトリを作成し、このブランチ（`work`）を push。
+2. リポジトリ設定 → Pages → ソースを「GitHub Actions」に変更（初回のみ）。
+3. `work` ブランチへ push するとワークフローが走り、`gh-pages` ブランチにビルド成果物（`dist`）が反映されます。`Actions` タブから手動実行も可能です。
+4. ワークフロー完了後、Pages の URL（例: `https://<username>.github.io/volume_change/`）にアクセスして動作を確認します。
+
+> ffmpeg コアファイルは CDN から取得するため、公開先でネットワークアクセスが必要です。
 
 ### Vercel の場合
 1. リポジトリを GitHub に push し、Vercel のダッシュボードで「Import Project」を選択。

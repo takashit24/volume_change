@@ -59,3 +59,23 @@ npm create vite@latest . -- --template react-ts
 3. ブラウザで `http://localhost:5173/` を開く
 
 ※ 初期ロード時に ffmpeg コアを CDN から取得するため、開発時もネットワーク接続が必要です。
+
+## デプロイ手順（例）
+このリポジトリは静的サイトとしてビルドできるため、Vercel/Netlify/GitHub Pages などの静的ホスティングにそのまま載せられます。以下は代表的な手順例です。
+
+### Vercel の場合
+1. リポジトリを GitHub に push し、Vercel のダッシュボードで「Import Project」を選択。
+2. Framework Preset に「Vite」を選択し、Build Command は `npm run build`、Output Directory は `dist` に設定。
+3. デプロイ後に表示される URL が本番 URL になります（CDN 経由で `ffmpeg-core` を取得するため、ネットワークアクセスが必要です）。
+
+### Netlify の場合
+1. Netlify で新規サイトを作成し、GitHub のリポジトリを選択。
+2. Build Command を `npm run build`、Publish directory を `dist` に設定。
+3. デプロイが完了するとサイト URL が発行されます。
+
+### GitHub Pages の場合
+1. `npm run build` で `dist/` を生成。
+2. `dist/` を `gh-pages` ブランチにデプロイ（例: `npm install -g gh-pages && gh-pages -d dist`）。
+3. Pages 設定で `gh-pages` ブランチのルートを公開すれば、`https://<username>.github.io/<repo>/` で利用できます。
+
+※ この環境では外部サービスへのデプロイが行えないため、上記手順を参考に任意のホスティング先で公開してください。

@@ -78,4 +78,9 @@ npm create vite@latest . -- --template react-ts
 2. `dist/` を `gh-pages` ブランチにデプロイ（例: `npm install -g gh-pages && gh-pages -d dist`）。
 3. Pages 設定で `gh-pages` ブランチのルートを公開すれば、`https://<username>.github.io/<repo>/` で利用できます。
 
+#### GitHub Actions を使って自動デプロイする場合
+リポジトリに用意した `.github/workflows/deploy.yml` を使うと、`work` ブランチへの push または手動実行で GitHub Pages へビルドと公開が行われます。`BASE_PATH` を `/リポジトリ名/` に設定しているため、GitHub Pages の公開パスでも正しく動作します。
+
+※ GitHub Pages への初回デプロイ時は、リポジトリ設定の「Pages」からデプロイソースを「GitHub Actions」に設定してください。
+
 ※ この環境では外部サービスへのデプロイが行えないため、上記手順を参考に任意のホスティング先で公開してください。
